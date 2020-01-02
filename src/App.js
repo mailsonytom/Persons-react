@@ -16,13 +16,21 @@ class App extends Component {
     // console.log('Was Clicked');
     this.setState ( {
       persons: [
-        { name: "Maximum", age: 28 },
+        { name: "newName", age: 28 },
         { name: "Manuion", age: 29 },
         { name: "Kevin", age: 28 }
       ]
-    }
-    )}
-
+    })
+  }
+  nameChangedHandler =  (event) => {
+    this.setState ( {
+      persons: [
+        { name: "Max", age: 28 },
+        { name: event.target.value , age: 29 },
+        { name: "Kevin", age: 22 }
+      ]
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -32,7 +40,8 @@ class App extends Component {
         age={this.state.persons[0].age} />
         <Person name={this.state.persons[1].name} 
         age={this.state.persons[1].age} 
-        click ={this.switchNameHandler}></Person>
+        click ={this.switchNameHandler}
+        changed={this.nameChangedHandler}></Person>
         <Person name={this.state.persons[2].name} 
         age={this.state.persons[2].age} />
       </div>
