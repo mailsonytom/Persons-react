@@ -9,7 +9,8 @@ class App extends Component {
       { name: "Manu", age: 29 },
       { name: "Kevin", age: 22 }
     ],
-    otherState :'Some other value '
+    otherState :'Some other value ',
+    showPersons: false
   };
 
   switchNameHandler = () => {
@@ -31,6 +32,12 @@ class App extends Component {
       ]
     })
   }
+
+togglePersonsHandler = () => {
+  const doesShow = this.state.showPersons;
+  this.setState({showPersons: !doesShow});
+}
+
   render() {
     const style = {
       backgroundColor : 'white',
@@ -44,8 +51,11 @@ class App extends Component {
         <h2>Welcome to React</h2>
         <button 
         style={style}
-        onClick={() => this.switchNameHandler('Maximin')}>Switch Name</button>
-        <Person name={this.state.persons[0].name} 
+        onClick={this.togglePersonsHandler}>Toggle persons</button>
+       {
+        this.state.showPersons ===true ? 
+        <div>
+       <Person name={this.state.persons[0].name} 
         age={this.state.persons[0].age} />
         <Person name={this.state.persons[1].name} 
         age={this.state.persons[1].age} 
@@ -53,6 +63,8 @@ class App extends Component {
         changed={this.nameChangedHandler}></Person>
         <Person name={this.state.persons[2].name} 
         age={this.state.persons[2].age} />
+       </div> : null
+       }
       </div>
 
     );
