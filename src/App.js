@@ -13,16 +13,7 @@ class App extends Component {
     showPersons: false
   };
 
-  switchNameHandler = () => {
-    // console.log('Was Clicked');
-    this.setState ( {
-      persons: [
-        { name: "newName", age: 28 },
-        { name: "Manuion", age: 29 },
-        { name: "Kevin", age: 28 }
-      ]
-    })
-  }
+ 
   nameChangedHandler =  (event) => {
     this.setState ( {
       persons: [
@@ -31,6 +22,12 @@ class App extends Component {
         { name: "Kevin", age: 22 }
       ]
     })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
 
 togglePersonsHandler = () => {
@@ -51,8 +48,12 @@ togglePersonsHandler = () => {
     if(this.state.showPersons){
       persons =(
         <div>
-          {this.state.persons.map(person => {
-            return <Person name={person.name} age={person.age}/>
+          {this.state.persons.map((person,index) => {
+            return 
+            
+            <Person
+            click={() => this.deletePersonHandler(index)}
+            name={person.name} age={person.age}/>
           })}
         </div> 
       );
