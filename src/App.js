@@ -1,98 +1,102 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium,{StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
   state = {
     persons: [
-      {id : "1", name: "Max", age: 28 },
-      {id : "2", name: "Manu", age: 29 },
-      {id : "3", name: "Kevin", age: 22 }
+      { id: "1", name: "Max", age: 28 },
+      { id: "2", name: "Manu", age: 29 },
+      { id: "3", name: "Kevin", age: 22 }
     ],
-    otherState :'Some other value ',
+    otherState: 'Some other value ',
     showPersons: false
   };
 
- 
-  nameChangedHandler =  (event, id) => {
+
+  nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
 
     const person = {
-       ...this.state.persons[personIndex]
+      ...this.state.persons[personIndex]
     };
 
     // const person = Object.assign({},this.state.persons[personIndex]);
 
     person.name = event.target.value;
-    
-    const persons =[...this.state.persons];
-    persons[personIndex] = person; 
 
-    this.setState ( {persons: persons});
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons });
   }
 
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
-    this.setState({persons: persons});
+    this.setState({ persons: persons });
   }
 
-togglePersonsHandler = () => {
-  const doesShow = this.state.showPersons;
-  this.setState({showPersons: !doesShow});
-}
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  }
 
   render() {
     const style = {
-      backgroundColor : 'green',
-      color : 'white',
-      font : 'inherit',
-      border : '1px solid blue',
-      padding : '8px',
-      cursor : 'pointer',
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
       ':hover': {
-      backgroundColor : 'lightgreen',
-      color : 'black'}
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
-    let persons= null;
-    if(this.state.showPersons){
-      persons =(
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
         <div>
-          {this.state.persons.map((person,index) => {
+          {this.state.persons.map((person, index) => {
             return <Person
-            click={() => this.deletePersonHandler(index)}
-            name={person.name} age={person.age} key={person.id}
-            changed={() => this.nameChangedHandler(event, person.id)}/>
+              click={() => this.deletePersonHandler(index)}
+              name={person.name} age={person.age} key={person.id}
+              changed={() => this.nameChangedHandler(event, person.id)} />
           })}
-        </div> 
+        </div>
       );
       style.backgroundColor = 'red';
       style[':hover'] = {
-        backgroundColor : 'salmon',
-        color : 'black'};
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     }
 
     const classes = [];
-    if(this.state.persons.length <=2 ){
+    if (this.state.persons.length <= 2) {
       classes.push('red');
     }
-    if(this.state.persons.length <=1 ){
+    if (this.state.persons.length <= 1) {
       classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <p className={classes.join(' ')}>Welcome to React</p>
-        <button 
-        style={style}
-        onClick={this.togglePersonsHandler}>Toggle persons</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <p className={classes.join(' ')}>Welcome to React</p>
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle persons</button>
+          {persons}
+        </div>
+      </StyleRoot>
 
     );
     // return React.createElement('div',{className :"App"},React.createElement('h1',null, 'Do something'));
