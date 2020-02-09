@@ -3,8 +3,8 @@ import './App.css';
 import styled from 'styled-components';
 import Person from './Person/Person';
 
-const StyledButton= styled.button` 
- background-color: green;
+const StyledButton = styled.button` 
+background-color: $(props => props.alt ? 'red' : 'green');
 color: white;
 font: inherit;
 border: 1px solid blue;
@@ -13,7 +13,7 @@ cursor: pointer;
 &:hover {
   background-color: lightgreen;
   color: black;
-}`;
+}`; 
 
 class App extends Component {
   state = {
@@ -100,10 +100,11 @@ class App extends Component {
     }
 
     return (
-      
+
       <div className="App">
         <p className={classes.join(' ')}>Welcome to React</p>
         <StyledButton
+          alt={this.state.showPersons}
           onClick={this.togglePersonsHandler}>Toggle persons</StyledButton>
         {persons}
       </div>
