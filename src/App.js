@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.module.css';
 import Person from './Person/Person';
 
 
@@ -58,7 +58,7 @@ class App extends Component {
             return <Person
               click={() => this.deletePersonHandler(index)}
               name={person.name} age={person.age} key={person.id}
-              changed={() => this.nameChangedHandler(event, person.id)} />
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       );
@@ -75,11 +75,11 @@ class App extends Component {
 
     return (
 
-      <div className="App">
+      <div className={styles.App}>
         <p className={classes.join(' ')}>Welcome to React</p>
         <button
           alt={this.state.showPersons}
-          className="button"
+          className={styles.button}
           onClick={this.togglePersonsHandler}>Toggle persons</button>
         {persons}
       </div>
