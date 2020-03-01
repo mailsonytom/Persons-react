@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
 import Person from './Person/Person';
+import Cockpit from './components/Cockpit/Cockpit';
 
 
 
@@ -48,7 +49,7 @@ class App extends Component {
   }
 
   render() {
-    
+
 
     let persons = null;
     if (this.state.showPersons) {
@@ -62,25 +63,16 @@ class App extends Component {
           })}
         </div>
       );
-     
-    }
 
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push('red');
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('bold');
     }
 
     return (
 
       <div className={styles.App}>
-        <p className={classes.join(' ')}>Welcome to React</p>
-        <button
-          alt={this.state.showPersons}
-          className={styles.button}
-          onClick={this.togglePersonsHandler}>Toggle persons</button>
+        <Cockpit 
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+        clicked={this.togglePersonsHandler}/>
         {persons}
       </div>
 
