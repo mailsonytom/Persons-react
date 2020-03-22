@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from './Person/Person';
-import Cockpit from './components/Cockpit/Cockpit';
+import Person from '../Person/Person';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 
