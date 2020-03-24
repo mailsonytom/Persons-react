@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Cockpit.module.css';
 
+const Cockpit = (props) => {
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
 
-const cockpit = (props) => {
+    setTimeout(() => {
+      alert('Saved');
+    }, 1000)
+  },[props.persons]);
+
   const assignedclasses = [];
   if (props.persons.length <= 2) {
     assignedclasses.push('styles.red');
@@ -17,10 +24,10 @@ const cockpit = (props) => {
       <button
         className={styles.button}
         onClick={props.clicked}
-        >Toggle persons
+      >Toggle persons
       </button>
     </div>
   );
 };
 
-export default cockpit;
+export default Cockpit;
