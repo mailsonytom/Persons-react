@@ -22,6 +22,10 @@ class Persons extends Component {
         console.log('[Persons.js] componentDidUpdate');
     }
 
+    componentWillUnmount(){
+        console.log('[App.js] componentWillUnmount');
+      }
+
     render() {
         console.log('[Persons.js] rendering...');
 

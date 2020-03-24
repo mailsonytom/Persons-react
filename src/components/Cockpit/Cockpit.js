@@ -8,7 +8,20 @@ const Cockpit = (props) => {
     setTimeout(() => {
       alert('Saved');
     }, 1000)
-  },[props.persons]);
+    return () => {
+      console.log('[Cockpit.js] Cleanup work useEffect');
+
+    };
+
+  }, []);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => {
+      console.log('[Cockpit.js] Cleanup work 2nd useEffect');
+
+    };
+  })
 
   const assignedclasses = [];
   if (props.persons.length <= 2) {
