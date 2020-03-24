@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import styles from './Cockpit.module.css';
 
 const Cockpit = (props) => {
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
 
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       alert('Saved');
     }, 1000)
     return () => {
-      clearTimeout(timer);
       console.log('[Cockpit.js] Cleanup work useEffect');
 
     };
@@ -25,10 +24,10 @@ const Cockpit = (props) => {
   })
 
   const assignedclasses = [];
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     assignedclasses.push('styles.red');
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignedclasses.push('styles.bold');
   }
 
@@ -44,4 +43,4 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+export default memo(Cockpit);
