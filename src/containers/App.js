@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import styles from './App.module.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+  }
+
   state = {
     persons: [
       { id: "1", name: "Max", age: 28 },
@@ -16,6 +22,14 @@ class App extends Component {
     showPersons: 'false'
   };
 
+  static getDerivedStateFromProps(props, state){
+    console.log('[App.js] getDerivedStateFromProps')
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -49,35 +63,29 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] render')
 
     let persons = null;
     if (this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name} age={person.age} key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)} />
-          })}
-        </div>
-      );
-
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler} />
+      )
     }
 
     return (
 
       <div className={styles.App}>
-        <Cockpit 
-        showPersons={this.state.showPersons}
-        persons={this.state.persons}
-        clicked={this.togglePersonsHandler}/>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
         {persons}
       </div>
 
     );
-    // return React.createElement('div',{className :"App"},React.createElement('h1',null, 'Do something'));
   }
 }
 

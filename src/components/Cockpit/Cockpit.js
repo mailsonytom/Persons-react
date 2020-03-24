@@ -15,7 +15,6 @@ const cockpit = (props) => {
     <div className={styles.Cockpit}>
       <p className={assignedclasses.join(' ')}>Welcome to React</p>
       <button
-        alt={props.showPersons}
         className={styles.button}
         onClick={props.clicked}
         >Toggle persons
