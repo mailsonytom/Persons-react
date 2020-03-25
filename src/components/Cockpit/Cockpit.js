@@ -1,13 +1,18 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useRef } from 'react';
 import styles from './Cockpit.module.css';
 
 const Cockpit = (props) => {
+
+  const toggleButtonRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
 
-    setTimeout(() => {
-      alert('Saved');
-    }, 1000)
+    // setTimeout(() => {
+    //   alert('Saved');
+    // }, 1000)
+    toggleButtonRef.current.click();
+
     return () => {
       console.log('[Cockpit.js] Cleanup work useEffect');
 
@@ -35,6 +40,7 @@ const Cockpit = (props) => {
     <div className={styles.Cockpit}>
       <p className={assignedclasses.join(' ')}>Welcome to React</p>
       <button
+        ref={toggleButtonRef}
         className={styles.button}
         onClick={props.clicked}
       >Toggle persons
