@@ -7,18 +7,25 @@ import Aux from '../../../hoc/Aux';
 
 class Person extends Component {
 
-componentDidMount(){
-    this.inputElement.focus();
-}
+    constructor(props) {
+        super(props)
+        this.inputElementRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // this.inputElement.focus();
+        this.inputElementRef.current.focus();
+    }
 
     render() {
         console.log('[Person.js] rendering');
         return (
             <Aux className="Person" style={styles}>
                 <div className="Person" >
-                        <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>
-                        <input
-                        ref={(inputEl) => {this.inputElement = inputEl}}
+                    <p onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>
+                    <input
+                        // ref={(inputEl) => {this.inputElement = inputEl}}
+                        ref={this.inputElementRef}
                         type="text" onChange={this.props.changed} value={this.props.name}></input>
                 </div>
             </Aux>
@@ -27,10 +34,10 @@ componentDidMount(){
 };
 
 Person.propTypes = {
-    click : propTypes.func,
-    name : propTypes.string,
-    age : propTypes.number,
-    changed : propTypes.func
+    click: propTypes.func,
+    name: propTypes.string,
+    age: propTypes.number,
+    changed: propTypes.func
 };
 
 export default Person;
