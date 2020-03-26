@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 
 
 
@@ -77,6 +78,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
+  loginHandler = () => {
+    this.setState({autheticated: true});
+  }
+
   render() {
     console.log('[App.js] render')
 
@@ -97,11 +102,19 @@ class App extends Component {
         }}>
           Remove Cockpit
         </button>
-        {this.state.showCockpit ? (<Cockpit
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonsHandler} />) : null}
-        {persons}
+        <AuthContext.Provider value={{
+          autheticated: this.state.autheticated,
+          login: this.loginHandler
+        }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+              />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </div>
 
     );
